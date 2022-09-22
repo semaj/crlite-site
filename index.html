@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+    <!-- <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /> -->
+    <!-- <meta name="description" content="A beautiful alternative to CSS resets &amp; normalisers." /> -->
+
+    <meta charset="utf-8">
+    <meta name="description" content="My description">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRLite</title>
+    <link rel="stylesheet" href="tacit.css">
+    <link rel="icon" href="clamp.svg"/>
+  </head>
+  <body>
+    <section>
+      <header>
+        <h1><b>CRLite</b></h1>
+        <p><b>A Scalable System for Pushing <mark>All</mark> TLS Revocations to All Browsers</b></p>
+        <br>
+        <p>
+        <a href="https://jameslarisch.com/pdf/crlite.pdf" target="_blank">
+          <button>📄 Paper</button>
+        </a>
+        <a href="https://github.com/mozilla/crlite" target="_blank">
+          <button>💾 Code</button>
+        </a>
+        <a href="#cite">
+          <button>❞ Cite</button>
+        </a>
+        </p>
+      </header>
+      <article>
+        <figure>
+          <img src="clamp.svg" alt="clamp" style="max-height: 50px;"/>
+        </figure>
+        <p>
+        <b>CRLite is a research project focused on improving certificate revocation in the Web PKI.</b>
+        </p>
+
+        <h1>News</h1>
+        <ul>
+        <li><b>2022-09-07:</b> <a href="https://letsencrypt.org/2022/09/07/new-life-for-crls.html" target="_blank">LetsEncrypt announces support for CRLs in light of technologies like CRLite.</a></li>
+          <li><b>2020-01-09:</b> <a href="https://blog.mozilla.org/security/2020/01/09/crlite-part-1-all-web-pki-revocations-compressed/" target="_blank">Mozilla introduces CRLite in Firefox Nightly.</a></li>
+          <li><b>2017:</b> CRLite wins the IEEE Cybersecurity Award for Innovation at IEEE SecDev.</li>
+        </ul>
+        <h1>About</h1>
+        <p>
+        In the Web PKI, TLS certificates are revoked by either website administrators or Certificate Authorities (CAs) when the certificate’s private key is compromised or in the wake of attacks like Heartbleed. Checking whether a certificate is revoked is difficult because the browser must either obtain a complete list of revoked certificates to check against (CRLs), or ask the CA whether that specific certificate is revoked (OCSP). This process is repeated for each new certificate encountered as the user browses the web.
+        </p>
+
+        <p>
+        Certificate revocation lists (CRLs) are distributed by each CA and can get quite large (Apple had a 70MB CRL!). Asking CAs whether a particular certificate is revoked (OCSP) is a breach of privacy, adds an extra RTT to each initial HTTPS request, and browsers fail-open, so if an attacker blocks the OCSP request, the browser assumes the certificate is not-revoked.
+        </p>
+
+        <p>
+        As a result, many browsers perform revocation checks only in certain cases, and (as of 2015) mobile browsers perform no checking at all.
+        </p>
+
+        <p>
+        Using CRLite, the browsers stores certificates revocation information in a "cascade" of bloom filters using only a few megabytes (if that) when compressed. The browser downloads daily updates (on the order of kilobytes). <b>Note: the exact performance numbers have changed over time as CRLite has undergone more study and implementation</b>.
+        </p>
+        <p>
+        In short, CRLite provides the following properties:
+        </p>
+
+        <ul>
+          <li>All certificates live within a single, local data structure</li>
+          <li>Because checks are local, there are no privacy compromises</li>
+          <li>Because checks are local, the browser needn’t fail-open</li>
+          <li>There is no developer or CA opt-in, unlike OCSP-Must-Staple</li>
+          <li>With caching, revocation checks are fast</li>
+        </ul>
+        <h1 id="cite">BibTeX Citation</h1>
+        <pre>
+<code>
+@inproceedings{larisch2017crlite,
+  title = {{CRLite: A Scalable System for Pushing all TLS Revocations to All Browsers}},
+  author = {Larisch, James and Choffnes, David and Levin, Dave and Maggs, Bruce M. and Mislove, Alan and Wilson, Christo},
+  booktitle={2017 IEEE Symposium on Security and Privacy (SP)},
+  pages={539--556},
+  year = {2017},
+}
+</code>
+        </pre>
+        <hr>
+        <h1>Authors</h1>
+        <ul>
+          <li><a target="_blank" href="https://jameslarisch.com/">James Larisch</a> - Harvard University</li>
+          <li><a target="_blank" href="https://david.choffnes.com/">Prof. David Choffnes</a> - Northeastern University</li>
+          <li><a target="_blank" href="https://www.cs.umd.edu/~dml/">Prof. Dave Levin</a> - University of Maryland</li>
+          <li><a target="_blank" href="https://users.cs.duke.edu/~bmm/">Prof. Bruce M. Maggs</a>- Duke University and Emerald Innovations</li>
+          <li><a target="_blank" href="https://mislove.org/">Prof. Alan Mislove</a> - Northeastern University</li>
+          <li><a target="_blank" href="https://cbw.sh/">Prof. Christo Wilson</a> - Northeastern University</li>
+        </ul>
+      </article>
+    </section>
+  </body>
+</html>
